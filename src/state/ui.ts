@@ -5,7 +5,7 @@ import type { Key } from '../core/keys';
 import type { ClefName } from '../core/instruments';
 import type { SolfegeDisplay, SolfegeSystem } from '../core/solfege';
 
-export type TabId = 'import' | 'score' | 'practice' | 'instrument' | 'offline';
+export type TabId = 'import' | 'score' | 'practice' | 'instrument' | 'offline'| 'converter';
 
 export interface UiState
 {

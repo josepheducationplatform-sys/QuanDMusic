@@ -1,0 +1,153 @@
+.satb-container {
+  max-width: 960px;
+  margin: 20px auto;
+  padding: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  color: #2c3e50;
+}
+
+.satb-header {
+  text-align: center;
+  border-bottom: 2px solid #f0f2f5;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.satb-header h1 {
+  margin: 0 0 8px 0;
+  font-size: 1.8rem;
+  color: #1a252f;
+}
+
+.satb-header h2 {
+  margin: 0 0 12px 0;
+  font-size: 1rem;
+  color: #7f8c8d;
+  font-weight: 400;
+}
+
+.meta-badge {
+  display: inline-flex;
+  gap: 16px;
+  background: #f8f9fa;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  border: 1px solid #e9ecef;
+}
+
+.satb-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.btn-download {
+  background-color: #27ae60;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-download:hover {
+  background-color: #219150;
+}
+
+.voice-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2px solid #e9ecef;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  padding: 10px 24px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #7f8c8d;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: #2c3e50;
+}
+
+.tab-btn.active {
+  color: #2980b9;
+  border-bottom-color: #2980b9;
+}
+
+.score-table-wrapper h3 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.score-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+
+.score-table th, 
+.score-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.score-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: #6c757d;
+}
+
+.pitch-cell {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.solfege-cell {
+  font-weight: 700;
+  color: #2980b9;
+  background-color: #f0f7fc;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 2px 8px;
+}
+
+.xml-preview {
+  margin-top: 30px;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 16px;
+  border-radius: 8px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.xml-preview h3 {
+  margin-top: 0;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.xml-preview pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+}

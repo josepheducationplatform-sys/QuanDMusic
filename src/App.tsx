@@ -17,6 +17,7 @@ import { ScorePanel } from './components/ScorePanel';
 import { PracticePanel } from './components/PracticePanel';
 import { InstrumentPanel } from './components/InstrumentPanel';
 import { OfflinePanel } from './components/OfflinePanel';
+import MusicConverter from './MusicConverter';
 
 const TABS: { id: TabId; label: string }[] = [
   { id: 'import', label: 'Upload' },
@@ -24,6 +25,7 @@ const TABS: { id: TabId; label: string }[] = [
   { id: 'practice', label: 'Practice' },
   { id: 'instrument', label: 'Instrument' },
   { id: 'offline', label: 'Offline' },
+  { id: 'converter', label: 'Converter' },
 ];
 
 function stripExtension(name: string): string {
@@ -450,8 +452,13 @@ export default function App() {
             onRefresh={() => void refreshProjects()}
             onExportAll={() => handleExportXml()}
           />
-        )}
-      </main>
+  )}
+{tab === 'converter' && (
+          <MusicConverter />
+        )
+  }
+
+  </main>
 
       {viewScore && (
         <footer className="transport">

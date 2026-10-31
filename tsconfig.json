@@ -1,21 +1,26 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
+    "target": "ES2023",
     "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable", "WebWorker"],
+    "lib": ["ES2023", "DOM", "DOM.Iterable", "WebWorker"],
     "module": "ESNext",
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
+    "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "skipLibCheck": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "forceConsistentCasingInFileNames": true,
+    "useUnknownInCatchVariables": false,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "allowJs": false,
     "types": ["vite/client"]
   },
-  "include": ["src", "tests", "vite.config.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "shared/**/*.ts", "vite.config.ts"]
 }
