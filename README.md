@@ -57,7 +57,7 @@ satb-omr serve --port 8000                            # web UI: upload, preview,
 
 ### Review flags
 
-Nothing is silently "corrected". Suspicious results are flagged for a human: notes outside the usual voice range, leaps over an octave, adjacent voices crossing, gaps filled with rests, incomplete/overfull measures, extra voices on a combined staff, unassigned staves.
+Nothing is silently "corrected". Suspicious results are flagged for a human: notes outside the usual voice range, leaps over an octave, adjacent voices crossing, gaps filled with rests, incomplete/overfull measures, extra voices on a combined staff, unassigned staves, and long rests while multiple other voices are active. The last case is only a review suggestionâ€”rests can be intentional, and the converter never invents replacement notes.
 
 ## Accuracy (current)
 
@@ -76,6 +76,7 @@ Public-domain hymns from Mutopia (Old 100th, Leoni, Easter Hymn) convert with 2â
 - Accuracy depends on Audiveris; handwritten music and poor phone photos are much weaker than clean prints.
 - Combined-staff chords with more than two notes keep only the top and bottom notes (flagged).
 - Per-symbol OMR confidence is not yet propagated to the report.
+- The review flags are conservative heuristics, not a trained note-correction model; verify flagged passages against the source score.
 - oemer currently crashes on some pages with recent OpenCV versions; Audiveris is the supported engine.
 
 ## Development

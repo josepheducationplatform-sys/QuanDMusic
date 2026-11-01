@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from itertools import pairwise
+
 from music21 import note, stream
 
 from .satb import Flag
@@ -73,10 +75,62 @@ def check_crossings(score: stream.Score, flags: list[Flag]) -> None:
                 )
 
 
+def check_suspicious_rests(score: stream.Score, flags: list[Flag]) -> None:
+    """Suggest long rests for review when multiple other voices are active."""
+    parts = list(score.parts)
+    measures_by_part = [list(part.getElementsByClass(stream.Measure)) for part in parts]
+    for part_index, part in enumerate(parts):
+        for measure_index, measure in enumerate(measures_by_part[part_index]):
+            other_notes: list[tuple[int, float, float]] = []
+            for other_index, measures in enumerate(measures_by_part):
+                if other_index == part_index or measure_index >= len(measures):
+                    continue
+                other_measure = measures[measure_index]
+                for n in other_measure.recurse().getElementsByClass(note.Note):
+                    start = float(n.getOffsetInHierarchy(other_measure))
+                    other_notes.append((other_index, start, start + float(n.quarterLength)))
+
+            for rest in measure.recurse().getElementsByClass(note.Rest):
+                duration = float(rest.quarterLength)
+                if duration < 2.0:
+                    continue
+                start = float(rest.getOffsetInHierarchy(measure))
+                end = start + duration
+                boundaries = {start, end}
+                for _, note_start, note_end in other_notes:
+                    if note_start < end and note_end > start:
+                        boundaries.add(max(start, note_start))
+                        boundaries.add(min(end, note_end))
+                ordered = sorted(boundaries)
+                active_duration = 0.0
+                for left, right in pairwise(ordered):
+                    midpoint = (left + right) / 2
+                    active_parts = {
+                        other_index
+                        for other_index, note_start, note_end in other_notes
+                        if note_start <= midpoint < note_end
+                    }
+                    if len(active_parts) >= 2:
+                        active_duration += right - left
+                if active_duration / duration >= 0.6:
+                    flags.append(
+                        Flag(
+                            part.partName,
+                            measure.number,
+                            start,
+                            "possible-missed-notes",
+                            f"{duration:g}-beat rest while at least two other voices are active for "
+                            f"{active_duration / duration:.0%} of it; verify against the score "
+                            "(no notes were inferred)",
+                        )
+                    )
+
+
 def validate(score: stream.Score) -> list[Flag]:
     flags: list[Flag] = []
     for p in score.parts:
         check_ranges(p, flags)
         check_leaps(p, flags)
     check_crossings(score, flags)
+    check_suspicious_rests(score, flags)
     return flags
